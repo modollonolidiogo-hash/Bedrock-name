@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquivo Histórico | Linha do Tempo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #fcf8f2;
+            color: #2c251e;
+            line-height: 1.6;
+        }
+        header {
+            background-color: #4a3b32;
+            color: #f5eae0;
+            text-align: center;
+            padding: 3rem 1rem;
+            border-bottom: 5px solid #8c6d53;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        header p {
+            font-style: italic;
+            font-size: 1.1rem;
+            color: #d1bfa7;
+        }
+        nav {
+            background-color: #362a22;
+            text-align: center;
+            padding: 0.5rem;
+            position: sticky;
+            top: 0;
+        }
+        nav a {
+            color: #f5eae0;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+        nav a:hover {
+            color: #8c6d53;
+        }
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        .card {
+            background: #ffffff;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-left: 5px solid #8c6d53;
+        }
+        .card h2 {
+            color: #4a3b32;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        .card .date {
+            font-style: italic;
+            color: #7a685a;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        footer {
+            background-color: #4a3b32;
+            color: #d1bfa7;
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.9rem;
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Arquivo Histórico</h1>
+        <p>Uma jornada pelas grandes civilizações e eras do passado</p>
+    </header>
+
+    <nav>
+        <a href="#grecia">Grécia Antiga</a>
+        <a href="#roma">Império Romano</a>
+        <a href="#idade-media">Idade Média</a>
+    </nav>
+
+    <div class="container">
+
+        <!-- Seção: Grécia Antiga -->
+        <section id="grecia" class="card">
+            <h2>A Democracia e Filosofia da Grécia Antiga</h2>
+            <span class="date">Século V a.C.</span>
+            <p>A Grécia Antiga é considerada o berço da civilização ocidental. Foi em Atenas que nasceu o conceito de democracia, permitindo que os cidadãos participassem das decisões políticas. Esse período também foi marcado pelo florescimento da filosofia, com grandes pensadores como Sócrates, Platão e Aristóteles, cujas ideias moldaram a ciência e o pensamento atual.</p>
+        </section>
+
+        <!-- Seção: Império Romano -->
+        <section id="roma" class="card">
+            <h2>A Expansão e o Legado do Império Romano</h2>
+            <span class="date">27 a.C. – 476 d.C.</span>
+            <p>O Império Romano foi uma das estruturas políticas e militares mais poderosas da história. Controlando quase toda a bacia do Mediterrâneo, os romanos deixaram um legado monumental em áreas como o Direito Civil, a engenharia de estradas e aquedutos, e a arquitetura (com o Coliseu e o Panteão). A queda de Roma em 476 marcou o fim da Antiguidade.</p>
+        </section>
+
+        <!-- Seção: Idade Média -->
+        <section id="idade-media" class="card">
+            <h2>O Feudalismo na Idade Média</h2>
+            <span class="date">Século V – Século XV</span>
+            <p>Frequentemente chamada de forma injusta como "Idade das Trevas", a Idade Média foi uma era de profunda organização religiosa, cultural e social. O sistema econômico principal era o feudalismo, baseado na relação entre senhores feudais e servos. Foi também o período de construção das grandes catedrais góticas e do surgimento das primeiras universidades europeias.</p>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Meu Site de História. Criado no GitHub Pages.</p>
+    </footer>
+
+</body>
+</html>

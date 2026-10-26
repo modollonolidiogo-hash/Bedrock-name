@@ -3,129 +3,331 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arquivo Histórico | Linha do Tempo</title>
+    <title>Minecraft Addons Hub</title>
+    <!-- Ícones do FontAwesome -->
+    <link rel="stylesheet" href="https://cloudflare.com">
     <style>
-        * {
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --accent-color: #38bdf8;
+            --accent-green: #22c55e;
+            --text-color: #e2e8f0;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
         }
-        body {
-            font-family: 'Georgia', serif;
-            background-color: #fcf8f2;
-            color: #2c251e;
-            line-height: 1.6;
+
+        /* Container Principal do App */
+        .app-container {
+            width: 100%;
+            max-width: 500px;
+            background-color: #161616;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
+
+        /* Classe para esconder telas */
+        .hidden {
+            display: none !important;
+        }
+
+        /* ================= TELA 1: LISTA PRINCIPAL ================= */
+        .view-padding {
+            padding: 20px;
+        }
+
         header {
-            background-color: #4a3b32;
-            color: #f5eae0;
             text-align: center;
-            padding: 3rem 1rem;
-            border-bottom: 5px solid #8c6d53;
+            margin-bottom: 30px;
         }
+
         header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            color: #fff;
         }
+
         header p {
-            font-style: italic;
-            font-size: 1.1rem;
-            color: #d1bfa7;
+            color: var(--text-muted);
+            margin-top: 0;
         }
-        nav {
-            background-color: #362a22;
-            text-align: center;
-            padding: 0.5rem;
-            position: sticky;
-            top: 0;
-        }
-        nav a {
-            color: #f5eae0;
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
+
+        .section-title {
             font-size: 0.9rem;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin: 20px 0 10px 5px;
         }
-        nav a:hover {
-            color: #8c6d53;
+
+        .links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
-        .container {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
+
+        .link-card {
+            background-color: var(--card-bg);
+            border: 1px solid #2d2d2d;
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
         }
-        .card {
-            background: #ffffff;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border-radius: 4px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            border-left: 5px solid #8c6d53;
+
+        .link-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-color);
         }
-        .card h2 {
-            color: #4a3b32;
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
+
+        .icon-wrapper {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background-color: #2a2a2a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-right: 15px;
+            color: var(--accent-color);
         }
-        .card .date {
-            font-style: italic;
-            color: #7a685a;
+
+        .link-info {
+            flex-grow: 1;
+        }
+
+        .link-title {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+
+        .link-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .chevron {
+            color: #475569;
             font-size: 0.9rem;
-            margin-bottom: 1rem;
-            display: block;
         }
+
+        /* ================= TELA 2: DETALHES DO MOD ================= */
+        .app-header {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid #2d2d2d;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .mod-gallery {
+            width: 100%;
+            height: 220px;
+            background-color: #000;
+        }
+
+        .mod-gallery img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .mod-content {
+            padding: 20px;
+            margin-bottom: 80px; /* Espaço para não cobrir o botão fixo */
+        }
+
+        .mod-title {
+            font-size: 1.6rem;
+            margin: 0 0 10px 0;
+            color: #fff;
+        }
+
+        .creator-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            background: var(--card-bg);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--accent-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .creator-name {
+            font-size: 0.9rem;
+        }
+
+        .file-badge {
+            margin-left: auto;
+            background-color: #2d2d2d;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            color: #38bdf8;
+            font-weight: bold;
+        }
+
+        .mod-description {
+            line-height: 1.6;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        .mod-description h3 {
+            color: #fff;
+            margin-top: 20px;
+        }
+
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 500px;
+            background-color: #1e1e1e;
+            box-sizing: border-box;
+            padding: 15px;
+            border-top: 1px solid #2d2d2d;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            background-color: var(--accent-green);
+            color: #fff;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
         footer {
-            background-color: #4a3b32;
-            color: #d1bfa7;
             text-align: center;
-            padding: 1.5rem;
-            font-size: 0.9rem;
-            margin-top: 4rem;
+            margin-top: 40px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Arquivo Histórico</h1>
-        <p>Uma jornada pelas grandes civilizações e eras do passado</p>
-    </header>
+    <div class="app-container">
+        
+        <!-- ================= VISÃO 1: LISTA DE MODS ================= -->
+        <div id="lista-view" class="view-padding">
+            <header>
+                <h1>Minecraft Addons Hub</h1>
+                <p>Sua central de modificações e pacotes Bedrock</p>
+            </header>
 
-    <nav>
-        <a href="#grecia">Grécia Antiga</a>
-        <a href="#roma">Império Romano</a>
-        <a href="#idade-media">Idade Média</a>
-    </nav>
+            <div class="section-title">Parcerias & Portais</div>
+            <div class="links-list">
+                <!-- Link externo do seu portal -->
+                <a href="https://modsminecraft2.com" target="_blank" class="link-card">
+                    <div class="icon-wrapper"><i class="fa-solid fa-globe"></i></div>
+                    <div class="link-info">
+                        <div class="link-title">Mods Minecraft 2</div>
+                        <div class="link-desc">Visite o nosso site oficial na web.</div>
+                    </div>
+                    <div class="chevron"><i class="fa-solid fa-chevron-right"></i></div>
+                </a>
+            </div>
 
-    <div class="container">
+            <div class="section-title">Modificações Publicadas</div>
+            <div class="links-list">
+                <!-- Item da lista que abre a tela do mod ao clicar -->
+                <div class="link-card" onclick="abrirMod()">
+                    <div class="icon-wrapper" style="color: var(--accent-green);"><i class="fa-solid fa-cubes"></i></div>
+                    <div class="link-info">
+                        <div class="link-title">Super Carros Addon</div>
+                        <div class="link-desc">Postado por @UsuarioGamer (.mcaddon)</div>
+                    </div>
+                    <div class="chevron"><i class="fa-solid fa-chevron-right"></i></div>
+                </div>
+            </div>
 
-        <!-- Seção: Grécia Antiga -->
-        <section id="grecia" class="card">
-            <h2>A Democracia e Filosofia da Grécia Antiga</h2>
-            <span class="date">Século V a.C.</span>
-            <p>A Grécia Antiga é considerada o berço da civilização ocidental. Foi em Atenas que nasceu o conceito de democracia, permitindo que os cidadãos participassem das decisões políticas. Esse período também foi marcado pelo florescimento da filosofia, com grandes pensadores como Sócrates, Platão e Aristóteles, cujas ideias moldaram a ciência e o pensamento atual.</p>
-        </section>
+            <footer>
+                <p>Desenvolvido para a comunidade de Addons</p>
+            </footer>
+        </div>
 
-        <!-- Seção: Império Romano -->
-        <section id="roma" class="card">
-            <h2>A Expansão e o Legado do Império Romano</h2>
-            <span class="date">27 a.C. – 476 d.C.</span>
-            <p>O Império Romano foi uma das estruturas políticas e militares mais poderosas da história. Controlando quase toda a bacia do Mediterrâneo, os romanos deixaram um legado monumental em áreas como o Direito Civil, a engenharia de estradas e aquedutos, e a arquitetura (com o Coliseu e o Panteão). A queda de Roma em 476 marcou o fim da Antiguidade.</p>
-        </section>
 
-        <!-- Seção: Idade Média -->
-        <section id="idade-media" class="card">
-            <h2>O Feudalismo na Idade Média</h2>
-            <span class="date">Século V – Século XV</span>
-            <p>Frequentemente chamada de forma injusta como "Idade das Trevas", a Idade Média foi uma era de profunda organização religiosa, cultural e social. O sistema econômico principal era o feudalismo, baseado na relação entre senhores feudais e servos. Foi também o período de construção das grandes catedrais góticas e do surgimento das primeiras universidades europeias.</p>
-        </section>
+        <!-- ================= VISÃO 2: TELA DO MOD (INICIA ESCONDIDA) ================= -->
+        <div id="mod-view" class="hidden">
+            <!-- Topo com botão de voltar funcional -->
+            <div class="app-header">
+                <button class="back-btn" onclick="fecharMod()"><i class="fa-solid fa-arrow-left"></i></button>
+                <span style="font-weight: 600;">Visualizar Mod</span>
+            </div>
 
-    </div>
+            <!-- Imagem do Mod -->
+            <div class="mod-gallery">
+                <img src="https://unsplash.com" alt="Foto do Addon">
+            </div>
 
-    <footer>
-        <p>&copy; 2026 Meu Site de História. Criado no GitHub Pages.</p>
-    </footer>
+            <!-- Informações -->
+            <div class="mod-content">
+                <h1 class="mod-title">Super Carros Addon</h1>
+                
+                <div class="creator-info">
+                    <div class="avatar">U</div>
+                    <div class="creator-name">Postado por: <strong>@UsuarioGamer</strong></div>
+                    <span class="file-badge">.mcaddon</span>
+                </div>
 
-</body>
-</html>
+                <div class="mod-description">
+                    <h3>Descrição do Projeto</h3>
+                    <p>Este addon adiciona mais de 10 carros esportivos super velozes ao seu mundo de Minecraft Bedrock! Todos os veículos possuem animações personalizadas e som próprio.</p>
+                    
+                    <h3>Como Instalar:</h3>
+                    <p>1. Clique no botão de download abaixo.<br>
+                       2. Abra o arquivo com seu Minecraft Bedrock no celular ou PC.<br>
+                       3. Ative os pacotes de comportamento e recursos.</p>
+                </div>
+            </div>
+
+            <!-- Botão de Download Fixo Embaixo -->
+            <div class="bottom-bar">
+                
